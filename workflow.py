@@ -33,8 +33,11 @@ def main():
     with open("mockJson/mockMetadata.json", 'r') as load_mockMetadata:
         metadataJsonArr = json.load(load_mockMetadata)
         for item in metadataJsonArr:
-            metadataClient.createWorkflowDef(item)
-            # workflowClient.startWorkflow(item['name'],{'inputString':'xietiandi666'})
+            try:
+                metadataClient.createWorkflowDef(item)
+            except Exception as err:
+                print(err)
+            workflowClient.startWorkflow(item['name'],{'inputString':'xietiandi666'})
 
 
 if __name__ == '__main__':
