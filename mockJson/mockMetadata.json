@@ -1,0 +1,99 @@
+[
+  {
+    "createTime": 0,
+    "name": "tiandi_mockSyncMetadata",
+    "description": "code -> register code -> deregister code",
+    "version": 1,
+    "tasks": [
+      {
+        "name": "tiandi_code_task",
+        "taskReferenceName": "tiandi_code_task",
+        "type": "SIMPLE",
+        "inputParameters": {
+          "inputString": "${workflow.input.inputString}"
+        }
+      },
+      {
+        "name": "tiandi_register_task",
+        "taskReferenceName": "tiandi_register_task",
+        "type": "SIMPLE",
+        "inputParameters": {
+          "code": "${tiandi_code_task.output.code}"
+        }
+      },
+      {
+        "name": "tiandi_deregister_task",
+        "taskReferenceName": "tiandi_deregister_task",
+        "type": "SIMPLE",
+        "inputParameters": {
+          "code": "${tiandi_code_task.output.code}"
+        }
+      }
+    ],
+    "outputParameters": {
+      "code": "${tiandi_code_task.output.code}",
+      "registerStatus": "${tiandi_register_task.output.status}",
+      "deregisterStatus":"${tiandi_deregister_task.output.status}"
+    },
+    "schemaVersion": 2
+  },
+  {
+    "createTime": 0,
+    "name": "tiandi_mockParallelMetadata",
+    "description": "health -> parallel a,b,c",
+    "version": 1,
+    "tasks": [
+      {
+        "name": "tiandi_health_check_task",
+        "taskReferenceName": "tiandi_health_check_task",
+        "type": "SIMPLE"
+      },
+      {
+        "name": "tiandi_fork_join",
+        "taskReferenceName": "tiandi_fork",
+        "type": "FORK_JOIN",
+        "forkTasks": [
+          [
+            {
+              "name": "tiandi_a",
+              "taskReferenceName": "tiandi_a",
+              "type": "SIMPLE"
+            }
+          ],
+          [
+            {
+              "name": "tiandi_b",
+              "taskReferenceName": "tiandi_b",
+              "type": "SIMPLE"
+            }
+          ],
+          [
+            {
+              "name": "tiandi_c",
+              "taskReferenceName": "tiandi_c",
+              "type": "SIMPLE"
+            }
+          ]
+        ]
+      },
+      {
+        "name": "tiandi_join",
+        "taskReferenceName": "tiandi_join",
+        "type": "JOIN",
+        "startDelay": 0,
+        "joinOn": [
+          "tiandi_a",
+          "tiandi_b",
+          "tiandi_c"
+        ]
+      }
+    ],
+    "outputParameters": {
+      "health": "${tiandi_health_check_task.output.status}",
+      "a_result": "${tiandi_a.output.result}",
+      "b_result":"${tiandi_b.output.result}",
+      "c_result":"${tiandi_c.output.result}"
+    },
+    "schemaVersion": 2
+  }
+]

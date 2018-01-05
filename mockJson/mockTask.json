@@ -1,0 +1,99 @@
+{
+  "tiandi_sync_demo": [
+    {
+      "name": "tiandi_code_task",
+      "retryCount": 3,
+      "timeoutSeconds": 1200,
+      "inputKeys": [
+        "inputString"
+      ],
+      "outputKeys": [
+        "code"
+      ],
+      "timeoutPolicy": "TIME_OUT_WF",
+      "retryLogic": "FIXED",
+      "retryDelaySeconds": 600,
+      "responseTimeoutSeconds": 3600
+    },
+    {
+      "name": "tiandi_register_task",
+      "retryCount": 3,
+      "timeoutSeconds": 1200,
+      "inputKeys": [
+        "code"
+      ],
+      "outputKeys": [
+        "status"
+      ],
+      "timeoutPolicy": "TIME_OUT_WF",
+      "retryLogic": "FIXED",
+      "retryDelaySeconds": 600,
+      "responseTimeoutSeconds": 3600
+    },
+    {
+      "name": "tiandi_deregister_task",
+      "retryCount": 3,
+      "timeoutSeconds": 1200,
+      "inputKeys": [
+        "code"
+      ],
+      "outputKeys": [
+        "status"
+      ],
+      "timeoutPolicy": "TIME_OUT_WF",
+      "retryLogic": "FIXED",
+      "retryDelaySeconds": 600,
+      "responseTimeoutSeconds": 3600
+    }
+  ],
+  "tiandi_parallel_demo": [
+    {
+        "name": "tiandi_a",
+        "retryCount": 3,
+        "timeoutSeconds": 1200,
+        "outputKeys": [
+            "result"
+        ],
+        "timeoutPolicy": "TIME_OUT_WF",
+        "retryLogic": "FIXED",
+        "retryDelaySeconds": 600,
+        "responseTimeoutSeconds": 3600
+    },
+    {
+        "name": "tiandi_c",
+        "retryCount": 3,
+        "timeoutSeconds": 1200,
+        "outputKeys": [
+            "result"
+        ],
+        "timeoutPolicy": "TIME_OUT_WF",
+        "retryLogic": "FIXED",
+        "retryDelaySeconds": 600,
+        "responseTimeoutSeconds": 3600
+    },
+    {
+        "name": "tiandi_b",
+        "retryCount": 3,
+        "timeoutSeconds": 1200,
+        "outputKeys": [
+            "result"
+        ],
+        "timeoutPolicy": "TIME_OUT_WF",
+        "retryLogic": "FIXED",
+        "retryDelaySeconds": 600,
+        "responseTimeoutSeconds": 3600
+    },
+    {
+        "name": "tiandi_health_check_task",
+        "retryCount": 3,
+        "timeoutSeconds": 1200,
+        "outputKeys": [
+            "status"
+        ],
+        "timeoutPolicy": "TIME_OUT_WF",
+        "retryLogic": "FIXED",
+        "retryDelaySeconds": 600,
+        "responseTimeoutSeconds": 3600
+    }
+  ]
+}
