@@ -11,7 +11,7 @@ def execute4(task):
 
 def main():
     print('Starting Kitchensink workflows')
-    cc = ConductorWorker('http://202.120.167.198:8080/api', 1, 0.5)
+    cc = ConductorWorker('http://10.60.38.173:18080/api', 1, 0.5)
     for x in range(1, 30):
         if(x == 4):
             cc.start('task_{0}'.format(x), execute4, False)

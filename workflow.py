@@ -12,8 +12,8 @@ def unregisterTask(metadataClient,taskName):
 
 def main():
     print('Tiandi Workflow')
-    metadataClient = conductor.MetadataClient('http://10.60.38.173:8080/api')
-    workflowClient = conductor.WorkflowClient('http://10.60.38.173:8080/api')
+    metadataClient = conductor.MetadataClient('http://10.60.38.173:18080/api')
+    workflowClient = conductor.WorkflowClient('http://10.60.38.173:18080/api')
 
     tasks = metadataClient.getAllTaskDefs()
 

@@ -95,5 +95,135 @@
       "c_result":"${tiandi_c.output.result}"
     },
     "schemaVersion": 2
+  },
+  {
+    "createTime": 0,
+    "name": "tiandi_mockHttpParallel",
+    "description": "health -> http parallel a,b,c",
+    "version": 1,
+    "tasks": [
+      {
+        "name": "tiandi_http_health_check_task",
+        "taskReferenceName": "tiandi_http_health_check_task",
+        "inputParameters": {
+          "http_request": {
+            "uri": "http://10.60.38.176:8080/health",
+            "method": "GET"
+          }
+        },
+        "type": "HTTP"
+      },
+      {
+        "name": "tiandi_fork_join",
+        "taskReferenceName": "tiandi_fork",
+        "type": "FORK_JOIN",
+        "forkTasks": [
+          [
+            {
+              "name": "tiandi_http_a",
+              "taskReferenceName": "tiandi_http_a",
+              "inputParameters": {
+                "http_request": {
+                  "uri": "http://10.60.38.176:8080/a",
+                  "method": "GET"
+                }
+              },
+              "type": "HTTP"
+            }
+          ],
+          [
+            {
+              "name": "tiandi_http_b",
+              "taskReferenceName": "tiandi_http_b",
+              "inputParameters": {
+                "http_request": {
+                  "uri": "http://10.60.38.176:8080/b",
+                  "method": "GET"
+                }
+              },
+              "type": "HTTP"
+            }
+          ],
+          [
+            {
+              "name": "tiandi_http_c",
+              "taskReferenceName": "tiandi_http_c",
+              "inputParameters": {
+                "http_request": {
+                  "uri": "http://10.60.38.176:8080/c",
+                  "method": "GET"
+                }
+              },
+              "type": "HTTP"
+            }
+          ]
+        ]
+      },
+      {
+        "name": "tiandi_join",
+        "taskReferenceName": "tiandi_join",
+        "type": "JOIN",
+        "startDelay": 0,
+        "joinOn": [
+          "tiandi_http_a",
+          "tiandi_http_b",
+          "tiandi_http_c"
+        ]
+      }
+    ],
+    "outputParameters": {
+      "health": "${tiandi_health_check_task.output.status}",
+      "a_result": "${tiandi_http_a.output.response.body.name}",
+      "b_result":"${tiandi_http_b.output..name}",
+      "c_result":"${tiandi_http_c.output.response.body}"
+    },
+    "schemaVersion": 2
+  },
+  {
+    "createTime": 0,
+    "name": "tiandi_mockHttpSync",
+    "description": "a -> b -> c",
+    "version": 1,
+    "tasks": [
+      {
+        "name": "tiandi_http_a",
+        "taskReferenceName": "tiandi_http_a",
+        "inputParameters": {
+          "http_request": {
+            "uri": "http://10.60.38.176:8080/a",
+            "method": "GET"
+          }
+        },
+        "type": "HTTP"
+      },
+      {
+        "name": "tiandi_http_b",
+        "taskReferenceName": "tiandi_http_b",
+        "inputParameters": {
+          "http_request": {
+            "uri": "http://10.60.38.176:8080/b",
+            "method": "GET"
+          }
+        },
+        "type": "HTTP"
+      },
+      {
+        "name": "tiandi_http_c",
+        "taskReferenceName": "tiandi_http_c",
+        "inputParameters": {
+          "http_request": {
+            "uri": "http://10.60.38.176:8080/c",
+            "method": "GET"
+          }
+        },
+        "type": "HTTP"
+      }
+    ],
+    "outputParameters": {
+      "a_result": "${tiandi_http_a.output.response.body.name}",
+      "b_result":"${tiandi_http_b.output..name}",
+      "c_result":"${tiandi_http_c.output.response.body}"
+    },
+    "schemaVersion": 2
   }
 ]

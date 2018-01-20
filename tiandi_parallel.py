@@ -34,7 +34,7 @@ def main():
     print('Starting tinadi-demo workflows')
     metadataClient = conductor.MetadataClient('http://202.120.167.198:8080/api')
     # metadataClient.unRegisterTaskDef('tiandi_c');
-    cc = ConductorWorker('http://10.60.38.173:8080/api', 1, 2)
+    cc = ConductorWorker('http://10.60.38.173:18080/api', 1, 2)
     cc.start('tiandi_health_check_task', execute_health_check, False)
     cc.start('tiandi_a', execute_a, False)
     cc.start('tiandi_b', execute_b, False)

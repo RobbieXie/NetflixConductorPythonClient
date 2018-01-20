@@ -95,5 +95,43 @@
         "retryDelaySeconds": 600,
         "responseTimeoutSeconds": 3600
     }
+  ],
+  "tiandi_http_demo":[
+	{
+	  "name": "tiandi_http_a",
+	  "retryCount": 1,
+	  "timeoutSeconds": 0,
+	  "timeoutPolicy": "TIME_OUT_WF",
+	  "retryLogic": "FIXED",
+	  "retryDelaySeconds": 600,
+	  "responseTimeoutSeconds": 3600
+	},
+	{
+	  "name": "tiandi_http_b",
+	  "retryCount": 1,
+	  "timeoutSeconds": 0,
+	  "timeoutPolicy": "TIME_OUT_WF",
+	  "retryLogic": "FIXED",
+	  "retryDelaySeconds": 600,
+	  "responseTimeoutSeconds": 3600
+	},
+	{
+	  "name": "tiandi_http_c",
+	  "retryCount": 1,
+	  "timeoutSeconds": 0,
+	  "timeoutPolicy": "TIME_OUT_WF",
+	  "retryLogic": "FIXED",
+	  "retryDelaySeconds": 600,
+	  "responseTimeoutSeconds": 3600
+	},
+    {
+      "name": "tiandi_http_health_check_task",
+      "retryCount": 1,
+      "timeoutSeconds": 0,
+      "timeoutPolicy": "TIME_OUT_WF",
+      "retryLogic": "FIXED",
+      "retryDelaySeconds": 600,
+      "responseTimeoutSeconds": 3600
+    }
   ]
 }

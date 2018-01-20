@@ -29,7 +29,7 @@ def execute_deregister(task):
 
 def main():
     print('Starting tinadi-demo workflows')
-    cc = ConductorWorker('http://10.60.38.173:8080/api', 1, 2)
+    cc = ConductorWorker('http://10.60.38.173:18080/api', 1, 2)
     cc.start('tiandi_code_task', execute_code, False)
     cc.start('tiandi_register_task', execute_register, False)
     cc.start('tiandi_deregister_task', execute_deregister, True)
